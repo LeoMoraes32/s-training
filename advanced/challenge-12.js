@@ -1,8 +1,9 @@
 const nodejsRespos = require('../nodejs-repos.json');
+let repo = nodejsRespos.filter((item) => item.default_branch === 'master');
 
-const repo = nodejsRespos.map((item) => {
+const repoMap = repo.map((item) => {
   const { name, full_name, description, language, created_at } = item;
   return { name, full_name, description, language, created_at };
 });
-console.log(repo.length);
-console.log(repo);
+
+console.log(repoMap);
