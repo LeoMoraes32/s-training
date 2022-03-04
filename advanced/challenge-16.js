@@ -2,7 +2,7 @@ const nodejsRespos = require('../nodejs-repos.json');
 let repo = nodejsRespos.filter((item) => {
   if (item.language) {
     if (item.language === 'CSS' || item.language === 'Python') {
-      return item.license.language;
+      return item.language;
     }
   }
 });
@@ -12,4 +12,5 @@ let repoMap = repo.map((item) => {
   return { name, full_name, language, has_issues, has_projects };
 });
 
+console.log(repoMap.length);
 console.log(repoMap);
