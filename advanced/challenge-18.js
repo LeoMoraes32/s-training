@@ -29,7 +29,23 @@ const hasId = (id, bodyMockString, peopleMockString) => {
 
 //Rotas
 app.get('/', (req, res) => {
-  return res.send(people);
+  let valid = Object.keys(req.query);
+  if (valid.length > 0) {
+    filteredPeople = people.filter((item) => {
+      if (req.query.firstname === item.firstname) return item;
+      else if (req.query.lastname === item.lastname) return item;
+      else if (req.query.email === item.email) return item;
+      else if (req.query.tags === item.tags) return item;
+    });
+    console.log('passou aqui');
+    return res.send(filteredPeople);
+  } else {
+    let obj = {
+      people: people,
+      tam: people.length
+    };
+    return res.send(obj);
+  }
 });
 
 app.get('/:id', (req, res) => {
@@ -68,7 +84,7 @@ app.put('/:id', (req, res) => {
       const id = req.params.id;
       result = people[id];
 
-      people[req.params.id] = body;
+      people[result] = body;
       res.status(200);
       return res.send(people[req.params.id]);
     }
