@@ -7,7 +7,7 @@ app.listen(8000, () => {
   console.log('Server online!');
 });
 
-const people = [
+let people = [
   {
     firstname: 'Leonardo',
     lastname: 'Moraes',
@@ -15,6 +15,17 @@ const people = [
     tags: ['NodeJS', 'PHP', 'SQL']
   }
 ];
+//
+const hasId = (id, bodyMockString, peopleMockString) => {
+  if (id && id <= people.length - 1) {
+    if (bodyMockString.length <= peopleMockString.length) {
+      result = people[id];
+      return result;
+    }
+    return false;
+  }
+  return false;
+};
 
 //Rotas
 app.get('/', (req, res) => {
@@ -61,6 +72,27 @@ app.put('/:id', (req, res) => {
       res.status(200);
       return res.send(people[req.params.id]);
     }
+  } else {
+    res.status(400);
+    return res.send({ error: 'Id not found' });
+  }
+});
+
+app.delete('/:id', (req, res) => {
+  const id = req.params.id;
+
+  const bodyMock = Object.keys(req.body);
+  const peopleMock = Object.keys(people[0]);
+
+  const bodyMockString = JSON.stringify(bodyMock);
+  const peopleMockString = JSON.stringify(peopleMock);
+
+  const peopleResultant = hasId(id, bodyMockString, peopleMockString);
+  if (peopleResultant) {
+    let peopleResult = people.filter((item) => item != peopleResultant);
+    people = peopleResult;
+    res.status(204);
+    return res.send(`Deleted: ${peopleResultant}`);
   } else {
     res.status(400);
     return res.send({ error: 'Id not found' });
