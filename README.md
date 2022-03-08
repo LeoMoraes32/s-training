@@ -41,7 +41,7 @@ Utilizar o arquivo **nodejs-repos.json**.
   - [x] b. Crie uma constante do tipo objeto que possua 4 funções semelhantes as operações de: GET, POST, PUT, DELETE.
   - [x] c. Crie toda a lógica de inserir, atualizar, deletar ou buscar objetos dentro do array.
 
-#### Observações para o desafio 19:
+#### Observações para o desafio 18:
 
 - Obs1: O objeto a ser manipulado pode ser o mesmo da questão 5.
 - Obs2: O GET pode ser feito por qualquer atributo disponível.
